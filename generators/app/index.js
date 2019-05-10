@@ -19,7 +19,7 @@ module.exports = class extends Generator {
     const prompts = [
       {
         type: 'input',
-        name: 'title',
+        name: 'name',
         message: 'Your project name',
         default: this.appname
       },
@@ -31,11 +31,11 @@ module.exports = class extends Generator {
       }
     ];
 
-    this.log('App name: ', prompts.title)
+    this.log('App name: ', prompts.name)
     this.log('This feature: ', prompts.cool)
 
     return this.prompt(prompts).then(props => {
-      this.title = props.title
+      this.name = props.name
       this.cool = props.cool
     });
   }
@@ -49,8 +49,7 @@ module.exports = class extends Generator {
   writing() {
     this.fs.copy(
       this.templatePath('index.js'),
-      this.destinationPath('index.js'),
-      { title: this.prompts.title }
+      this.destinationPath('index.js')
     );
   }
 
