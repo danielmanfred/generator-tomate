@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Daniel Manfred",
+      "authorEmail": "danielmanfred@gmail.com",
+      "authorUrl": ""
+    }
+  }
+}
