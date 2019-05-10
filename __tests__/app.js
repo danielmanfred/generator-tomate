@@ -11,6 +11,6 @@ describe('generator-tomate:app', () => {
   });
 
   it('creates files', () => {
-    assert.file(['dummyfile.txt']);
+    assert.file(['index.js']);
   });
 });

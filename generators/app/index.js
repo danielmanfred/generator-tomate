@@ -4,12 +4,6 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 
 module.exports = class extends Generator {
-  constructor(args, opts) {
-    super(args, opts)
-
-    this.helperMethod = () => console.log('wont be called automatically')
-  }
-
   prompting() {
     // Have Yeoman greet the user.
     this.log(
@@ -30,9 +24,6 @@ module.exports = class extends Generator {
         default: true
       }
     ];
-
-    this.log('App name: ', prompts.name)
-    this.log('This feature: ', prompts.cool)
 
     return this.prompt(prompts).then(props => {
       this.name = props.name
