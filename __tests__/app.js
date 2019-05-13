@@ -11,6 +11,6 @@ describe('generator-tomate:app', () => {
   });
 
   it('creates files', () => {
-    assert.file(['index.js']);
+    assert.file(['package.json', 'main.ts']);
   });
 });

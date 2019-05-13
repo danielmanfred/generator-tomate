@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 
 module.exports = class extends Generator {
+
   prompting() {
     // Have Yeoman greet the user.
     this.log(
@@ -14,45 +15,45 @@ module.exports = class extends Generator {
       {
         type: 'input',
         name: 'name',
-        message: 'Your project name',
-        default: this.appname
-      },
-      {
-        type: 'confirm',
-        name: 'cool',
-        message: 'Would you like to enable cool feature?',
-        default: true
+        message: 'Project name: ',
+        default: 'my-project'
       }
-    ];
+    ]
 
-    return this.prompt(prompts).then(props => {
-      this.name = props.name
-      this.cool = props.cool
-    });
-  }
-
-  paths() {
-    this.sourceRoot()
-    this.destinationRoot()
-    this.destinationPath('index.js')
+    return this.prompt(prompts).then((props => {
+      this.props = props
+    }).bind(this))
   }
 
   writing() {
-    this.fs.copy(
-      this.templatePath('index.js'),
-      this.destinationPath('index.js')
-    );
-  }
+    const name = this.props.name
 
+    this.fs.copyTpl(
+      `${this.templatePath()}/**/!(_)`,
+      this.destinationPath(`${name}`),
+      this.props
+    )
+
+    this.fs.copy(
+      this.templatePath('src/_element.controller.ts'),
+      this.destinationPath(`${name}/src/${name}.controller.ts`), 
+      this.props
+    )
+
+    this.fs.copy(
+      this.templatePath('src/_element.module.ts'),
+      this.destinationPath(`${name}/src/${name}.module.ts`), 
+      this.props
+    )
+
+    this.fs.copy(
+      this.templatePath('src/_element.service.ts'),
+      this.destinationPath(`${name}/src/${name}.service.ts`), 
+      this.props
+    )
+  }
+  
   install() {
     this.installDependencies();
-  }
-
-  tomateMethod() {
-    this.log('This is a tomate method')
-  }
-
-  _private_method() {
-    this.log('Here is a private method')
   }
 };
